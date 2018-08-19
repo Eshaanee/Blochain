@@ -1,0 +1,37 @@
+pragma solidity ^0.4.17;
+contract IG {
+    address[] donars;
+    uint[] public donatedAmount;
+    uint donarCount=0;
+    uint public totalAmount;
+    uint public minContribution;
+    address donar;
+    address public IG1;
+    
+    function IG(uint minimumValue) {
+        IG1=msg.sender;
+        minContribution=minimumValue;
+    }
+    function donate(uint value) public payable {
+       // require(msg.value > minContribution);
+        donar =msg.sender;
+        donars.push(donar);
+        donatedAmount.push(msg.value);
+        donarCount++;
+        totalAmount= totalAmount+msg.value;
+        IG1.transfer(totalAmount);
+        
+    }
+    function getDonars() public view returns(address[]) {
+        return donars;
+        
+    }
+    function getDonatedlAmount() public view returns(uint[]) {
+        return donatedAmount;
+    }
+    
+    function gett() public view returns(uint) {
+        return totalAmount;
+        
+    }
+}
